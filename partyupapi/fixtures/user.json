@@ -1,0 +1,14 @@
+[
+    {
+        "model": "partyupapi.user",
+        "pk": 1,
+        "fields": {
+            "fbKey": "testing",
+            "joinDate": 2134214,
+            "account_playstation": "myusername",
+            "account_xbox": "myusername",
+            "account_steam": "myusername",
+            "account_discord": "myusername"
+        }
+    }
+]
