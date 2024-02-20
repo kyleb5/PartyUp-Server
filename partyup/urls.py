@@ -17,10 +17,13 @@ from django.conf.urls import include
 from rest_framework import routers
 from django.contrib import admin
 from django.urls import path
-from partyupapi.views import register_user, check_user, UserView
+from django.conf.urls.static import static
+from django.conf import settings
+from partyupapi.views import register_user, check_user, UserView, GamesView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'user', UserView, 'user')
+router.register(r'games', GamesView, 'games')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,3 +31,7 @@ urlpatterns = [
     path('register', register_user),
     path('checkuser', check_user),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
