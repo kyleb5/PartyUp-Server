@@ -8,7 +8,7 @@ from partyupapi.models import User
 
 
 class UserView(ViewSet):
-    """HHPNW user view"""
+    """Party Up user view"""
 
     def retrieve(self, request, pk):
         """Handle GET requests for Users"""
