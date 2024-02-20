@@ -14,3 +14,4 @@ class LFGPost(models.Model):
     mic_needed = models.BooleanField()
     status = models.BooleanField()
     uuid = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.IntegerField(default=0)

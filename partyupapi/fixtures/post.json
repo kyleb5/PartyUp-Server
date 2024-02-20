@@ -1,0 +1,19 @@
+[
+    {
+        "model": "partyupapi.lfgpost",
+        "pk": 1,
+        "fields": {
+            "game": 3,
+            "title": "Looking for Gold players",
+            "description": "title says it all",
+            "needed_players": 4,
+            "skill_level": "Gold 3",
+            "platform": "PC",
+            "region": "America",
+            "mic_needed": true,
+            "status": true,
+            "uuid": 1,
+            "timestamp": 5325235235
+        }
+    }
+]

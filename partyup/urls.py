@@ -19,11 +19,12 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from partyupapi.views import register_user, check_user, UserView, GamesView
+from partyupapi.views import register_user, check_user, UserView, GamesView, LFGPostView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'user', UserView, 'user')
 router.register(r'games', GamesView, 'games')
+router.register(r'post', LFGPostView, 'post')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
