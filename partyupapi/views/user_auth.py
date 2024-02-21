@@ -48,7 +48,7 @@ def register_user(request):
         account_playstation=request.data["account_playstation"],
         account_xbox=request.data["account_xbox"],
         account_steam=request.data["account_steam"],
-        accouint_discord=request.data["account_discord"]
+        account_discord=request.data["account_discord"]
     )
 
     # Return the user info to the client
