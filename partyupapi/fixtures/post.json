@@ -15,5 +15,22 @@
             "uuid": 1,
             "timestamp": 5325235235
         }
+    },
+    {
+        "model": "partyupapi.lfgpost",
+        "pk": 2,
+        "fields": {
+            "game": 3,
+            "title": "Looking for Good players",
+            "description": "Tryna meet new people",
+            "needed_players": 4,
+            "skill_level": "No Preference",
+            "platform": "PC",
+            "region": "America",
+            "mic_needed": true,
+            "status": true,
+            "uuid": 1,
+            "timestamp": 5325235235
+        }
     }
 ]

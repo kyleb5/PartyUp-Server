@@ -20,8 +20,14 @@ class LFGPostView(ViewSet):
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
 
     def list(self, request):
-        """Handle GET requests to get ALL posts"""
+        """Handle GET requests to get ALL posts or posts for a specific game"""
         lfgpost = LFGPost.objects.all()
+
+        gameid = request.query_params.get('game', None)
+
+        if gameid is not None:
+            lfgpost = lfgpost.filter(game__id=gameid)
+
         serializer = LFGPostSerializer(lfgpost, many=True)
         return Response(serializer.data)
 
