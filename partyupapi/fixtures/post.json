@@ -32,5 +32,22 @@
             "uuid": 1,
             "timestamp": 1708791520
         }
+    },
+    {
+        "model": "partyupapi.lfgpost",
+        "pk": 3,
+        "fields": {
+            "game": 2,
+            "title": "Help Needed",
+            "description": "pls help",
+            "needed_players": 5,
+            "skill_level": "Expert",
+            "platform": "Xbox",
+            "region": "North America",
+            "mic_needed": false,
+            "status": true,
+            "uuid": 5,
+            "timestamp": 1708808379809
+        }
     }
 ]

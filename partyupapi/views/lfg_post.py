@@ -4,7 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from partyupapi.models import LFGPost, Games
+from partyupapi.models import LFGPost, Games, User
 
 
 class LFGPostView(ViewSet):
@@ -33,25 +33,33 @@ class LFGPostView(ViewSet):
 
     def create(self, request):
         """Handle POST for posts"""
-        game = Games.objects.get(pk=request.data["game"])
-        lfgpost = LFGPost.objects.create(
-            game=request.data["game"],
-            title=request.data["title"],
-            description=request.data["description"],
-            needed_players=request.data["needed_players"],
-            skill_level=request.data["skill_level"],
-            platform=request.data["platform"],
-            region=request.data["region"],
-            mic_needed=request.data["mic_needed"],
-            status=request.data["status"],
-            uuid=request.data["uuid"],
-            timestamp=request.data["timestamp"]
-        )
+        try:
+            game_instance = Games.objects.get(pk=request.data["game"])
+            # Assuming uuid is the primary key for User
+            user_instance = User.objects.get(pk=request.data["uuid"])
+            lfgpost = LFGPost.objects.create(
+                game=game_instance,
+                title=request.data["title"],
+                description=request.data["description"],
+                needed_players=request.data["needed_players"],
+                skill_level=request.data["skill_level"],
+                platform=request.data["platform"],
+                region=request.data["region"],
+                mic_needed=request.data["mic_needed"],
+                status=request.data["status"],
+                uuid=user_instance,
+                timestamp=request.data["timestamp"]
+            )
+
+            serializer = LFGPostSerializer(lfgpost)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response({'message': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def update(self, request, pk):
         """Handle PUT requests for posts"""
         post = LFGPost.objects.get(pk=pk)
-        post.game = request.data["game"]
+        post.game = Games.objects.get(pk=request.data["game"])
         post.title = request.data["title"]
         post.description = request.data["description"]
         post.needed_players = request.data["needed_players"]
@@ -60,11 +68,11 @@ class LFGPostView(ViewSet):
         post.region = request.data["region"]
         post.mic_needed = request.data["mic_needed"]
         post.status = request.data["status"]
-        post.uuid = request.data["uuid"]
+        post.uuid = User.objects.get(pk=request.data["uuid"])
         post.timestamp = request.data["timestamp"]
         post.save()
 
-        return Response({'message': 'Post updated succesfully'}, status=status.HTTP_204_NO_CONTENT)
+        return Response({'message': 'Post updated successfully'}, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk):
         """Handle DELETE requests for LFG Post"""
