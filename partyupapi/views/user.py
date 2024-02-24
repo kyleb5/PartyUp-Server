@@ -22,6 +22,12 @@ class UserView(ViewSet):
     def list(self, request):
         """Handle GET requests to get all users"""
         users = User.objects.all()
+
+        fbkey = request.query_params.get('fbKey', None)
+
+        if fbkey is not None:
+            users = users.filter(fbKey=fbkey)
+
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 

@@ -33,9 +33,9 @@ class LFGPostView(ViewSet):
 
     def create(self, request):
         """Handle POST for posts"""
-        games = Games.objects.get(pk=request.data["games"])
+        game = Games.objects.get(pk=request.data["game"])
         lfgpost = LFGPost.objects.create(
-            games=request.data["games"],
+            game=request.data["game"],
             title=request.data["title"],
             description=request.data["description"],
             needed_players=request.data["needed_players"],
@@ -51,7 +51,7 @@ class LFGPostView(ViewSet):
     def update(self, request, pk):
         """Handle PUT requests for posts"""
         post = LFGPost.objects.get(pk=pk)
-        post.games = request.data["games"]
+        post.game = request.data["game"]
         post.title = request.data["title"]
         post.description = request.data["description"]
         post.needed_players = request.data["needed_players"]
