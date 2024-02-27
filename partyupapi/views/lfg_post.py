@@ -35,7 +35,6 @@ class LFGPostView(ViewSet):
         """Handle POST for posts"""
         try:
             game_instance = Games.objects.get(pk=request.data["game"])
-            # Assuming uuid is the primary key for User
             user_instance = User.objects.get(pk=request.data["uuid"])
             lfgpost = LFGPost.objects.create(
                 game=game_instance,
