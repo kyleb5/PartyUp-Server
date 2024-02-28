@@ -64,4 +64,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('fbKey', 'joinDate', 'id', 'account_playstation',
-                  'account_xbox', 'account_steam', 'account_discord')
+                  'account_xbox', 'account_steam', 'account_discord', 'email_address', 'username')

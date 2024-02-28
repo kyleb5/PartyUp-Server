@@ -21,6 +21,8 @@ def check_user(request):
         data = {
             'id': user.id,
             'joinDate': user.joinDate,
+            'username': user.username,
+            'email_address': user.email_address,
             'fbKey': user.fbKey,
             'account_playstation': user.account_playstation,
             'account_xbox': user.account_xbox,
@@ -44,6 +46,8 @@ def register_user(request):
 
     user = User.objects.create(
         joinDate=request.data["joinDate"],
+        username=request.data["username"],
+        email_address=request.data["email_address"],
         fbKey=request.data["fbKey"],
         account_playstation=request.data["account_playstation"],
         account_xbox=request.data["account_xbox"],
@@ -54,6 +58,8 @@ def register_user(request):
     # Return the user info to the client
     data = {
         'id': user.id,
+        'username': user.username,
+        'email_address': user.email_address,
         'joinDate': user.joinDate,
         'fbKey': user.fbKey,
         'account_playstation': user.account_playstation,
