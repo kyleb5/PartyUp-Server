@@ -5,8 +5,10 @@ from django.db import models
 
 class User(models.Model):
     fbKey = models.CharField(max_length=30)
-    joinDate = models.IntegerField()
-    account_playstation = models.CharField(max_length=50, unique=True)
-    account_xbox = models.CharField(max_length=50, unique=True)
-    account_steam = models.CharField(max_length=50, unique=True)
-    account_discord = models.CharField(max_length=50, unique=True)
+    username = models.CharField(max_length=50, unique=True, default="username")
+    email_address = models.EmailField(default="email")
+    joinDate = models.DateTimeField(auto_now_add=True)
+    account_playstation = models.CharField(max_length=50)
+    account_xbox = models.CharField(max_length=50)
+    account_steam = models.CharField(max_length=50)
+    account_discord = models.CharField(max_length=50)
