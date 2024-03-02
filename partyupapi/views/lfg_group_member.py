@@ -22,10 +22,10 @@ class LFGGroupMemberView(ViewSet):
         """Handle Get requests for ALL group members"""
         groupmember = LFGGroupMember.objects.all()
 
-        members = request.query_params.get('post', None)
+        postid = request.query_params.get('post', None)
 
-        if members is not None:
-            members = groupmember.filter(user__id=members)
+        if postid is not None:
+            groupmember = groupmember.filter(post__id=postid)
 
         serializer = LFGGroupMemberSerializer(groupmember, many=True)
         return Response(serializer.data)
