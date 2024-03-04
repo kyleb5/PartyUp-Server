@@ -58,17 +58,21 @@ class LFGPostView(ViewSet):
     def update(self, request, pk):
         """Handle PUT requests for posts"""
         post = LFGPost.objects.get(pk=pk)
-        post.game = Games.objects.get(pk=request.data["game"])
-        post.title = request.data["title"]
-        post.description = request.data["description"]
-        post.needed_players = request.data["needed_players"]
-        post.skill_level = request.data["skill_level"]
-        post.platform = request.data["platform"]
-        post.region = request.data["region"]
-        post.mic_needed = request.data["mic_needed"]
-        post.status = request.data["status"]
-        post.uuid = User.objects.get(pk=request.data["uuid"])
-        post.timestamp = request.data["timestamp"]
+        game_instance = Games.objects.get(pk=request.data["game"])
+
+        post.status = request.data.get("status", post.status)
+        post.title = request.data.get("title", post.title)
+        post.description = request.data.get("description", post.description)
+        post.needed_players = request.data.get(
+            "needed_players", post.needed_players)
+        post.skill_level = request.data.get("skill_level", post.skill_level)
+        post.platform = request.data.get("platform", post.platform)
+        post.region = request.data.get("region", post.region)
+        post.mic_needed = request.data.get("mic_needed", post.mic_needed)
+        post.uuid = User.objects.get(pk=request.data.get("uuid", post.uuid.id))
+        post.timestamp = request.data.get("timestamp", post.timestamp)
+        post.game = game_instance
+
         post.save()
 
         return Response({'message': 'Post updated successfully'}, status=status.HTTP_204_NO_CONTENT)
