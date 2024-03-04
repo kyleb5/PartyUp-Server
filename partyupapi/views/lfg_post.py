@@ -58,6 +58,7 @@ class LFGPostView(ViewSet):
     def update(self, request, pk):
         """Handle PUT requests for posts"""
         post = LFGPost.objects.get(pk=pk)
+        game_instance = Games.objects.get(pk=request.data["game"])
 
         post.status = request.data.get("status", post.status)
         post.title = request.data.get("title", post.title)
@@ -70,8 +71,7 @@ class LFGPostView(ViewSet):
         post.mic_needed = request.data.get("mic_needed", post.mic_needed)
         post.uuid = User.objects.get(pk=request.data.get("uuid", post.uuid.id))
         post.timestamp = request.data.get("timestamp", post.timestamp)
-        post.game = Games.objects.get(
-            pk=request.data.get("game", post.game.id))
+        post.game = game_instance
 
         post.save()
 
