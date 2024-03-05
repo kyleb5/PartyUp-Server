@@ -44,10 +44,14 @@ class UserView(ViewSet):
     def update(self, request, pk):
         """Handle PUT requests for users"""
         user = User.objects.get(pk=pk)
-        user.uid = request.data["uid"]
+        user.fbKey = request.data["fbKey"]
         user.joinDate = request.data["joinDate"]
-        user.hasAccess = request.data["hasAccess"]
+        user.account_discord = request.data["account_discord"]
+        user.account_steam = request.data["account_steam"]
+        user.account_xbox = request.data["account_xbox"]
+        user.account_playstation = request.data["account_playstation"]
         user.id = request.data["id"]
+        user.username = request.data["username"]
         user.save()
 
         return Response(None, status=status.HTTP_204_NO_CONTENT)
