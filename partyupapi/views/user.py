@@ -34,9 +34,13 @@ class UserView(ViewSet):
     def create(self, request):
         """Handle POST users"""
         user = User.objects.create(
-            uid=request.data["uid"],
             joinDate=request.data["joinDate"],
-            hasAccess=request.data["hasAccess"]
+            fbKey=request.data["fbKey"],
+            account_discord=request.data["account_discord"],
+            account_steam=request.data["account_steam"],
+            account_xbox=request.data["account_xbox"],
+            account_playstation=request.data["account_playstation"],
+            username=request.data["username"]
         )
         serializer = UserSerializer(user)
         return Response(serializer.data)
